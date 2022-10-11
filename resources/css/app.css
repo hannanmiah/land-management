@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .form-group {
+        @apply flex flex-col space-y-1 md:space-y-2;
+    }
+
+    .form-control {
+        @apply block w-full p-2 md:p-3 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-md dark:text-gray-300 dark:focus:shadow-lg rounded-md;
+    }
+
+    .error {
+        @apply text-red-500;
+    }
+}
