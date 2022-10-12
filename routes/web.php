@@ -28,7 +28,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware(['auth', 'can:viewAny,App\Models\Document'])->prefix('admin')->group(function () {
     Route::get('/', Dashboard::class)->name('admin.dashboard');
     Route::prefix('projects')->group(function () {
         Route::get('/', \App\Http\Livewire\Admin\Project\Index::class)->name('projects.index');

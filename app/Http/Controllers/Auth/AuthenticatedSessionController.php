@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if (\auth()->user()->role->slug == 'admin') {
+        if (\auth()->user()->role?->slug == 'admin') {
             return redirect()->intended(route('admin.dashboard'));
         }
 
