@@ -52,9 +52,10 @@
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                 >
+                    <th class="px-4 py-3">S.I</th>
                     <th class="px-4 py-3">Name</th>
                     <th class="px-4 py-3">Location</th>
-                    <th class="px-4 py-3">Photo</th>
+                    <th class="px-4 py-3 print:hidden">Photo</th>
                     <th class="px-4 py-3">Plots</th>
                     <th class="px-4 py-3 print:hidden">Actions</th>
                 </tr>
@@ -64,13 +65,16 @@
                 >
                 @forelse($projects as $project)
                     <tr class="text-gray-700 dark:text-gray-400">
-                        <td class="px-4 py-3">
+                        <td class="px-4 py-3 print:border">
+                            {{$projects->firstItem()+$loop->index}}
+                        </td>
+                        <td class="px-4 py-3 print:border">
                             {{$project->name}}
                         </td>
-                        <td class="px-4 py-3 text-sm">
+                        <td class="px-4 py-3 text-sm print:border">
                             {{$project->location}}
                         </td>
-                        <td class="px-4 py-3 text-xs">
+                        <td class="px-4 py-3 text-xs print:hidden">
                             @if($project->photo)
                                 <img class="w-8 h-8" src="{{Storage::disk('photos')->url($project->photo)}}"
                                      alt="{{$project->name}}">
@@ -78,12 +82,13 @@
                                 <span>No photo</span>
                             @endif
                         </td>
-                        <td class="px-4 py-3 text-sm">
+                        <td class="px-4 py-3 text-sm print:border">
                             <ul class="inline-flex flex-col space-y-1 md:space-y-2">
                                 @forelse($project->plots as $plot)
                                     <li>
                                         <a class="text-blue-500 hover:text-blue-600"
-                                           href="{{route('plots.show',['plot' => $plot->id])}}">{{$plot->name}}</a>
+                                           href="{{route('plots.show',['plot' => $plot->id])}}">{{$plot->name}}
+                                            ({{$plot->amount}})</a>
                                     </li>
                                 @empty
                                     <li>Empty!</li>

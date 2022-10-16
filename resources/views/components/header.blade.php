@@ -163,12 +163,17 @@
                     aria-label="Account"
                     aria-haspopup="true"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="w-8 h-8 fill-gray-200" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fill-rule="evenodd"
-                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                    </svg>
+                    @if(auth()->user()->photo)
+                        <img class="w-8 h-8 rounded-full" src="{{Storage::disk('photos')->url(auth()->user()->photo)}}"
+                             alt="{{auth()->user()->name}}">
+                    @else
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="w-8 h-8 fill-gray-200" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd"
+                                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                    @endif
                 </button>
 
                 <template x-if="isProfileMenuOpen">
@@ -182,29 +187,7 @@
                         <li class="flex">
                             <a
                                 class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                                href="#"
-                            >
-                                <svg
-                                    class="w-4 h-4 mr-3"
-                                    aria-hidden="true"
-                                    fill="none"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                    ></path>
-                                </svg>
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li class="flex">
-                            <a
-                                class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                                href="{{route('password.confirm')}}"
+                                href="{{route('settings.index')}}"
                             >
                                 <svg
                                     class="w-4 h-4 mr-3"

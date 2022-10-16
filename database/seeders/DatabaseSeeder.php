@@ -40,15 +40,16 @@ class DatabaseSeeder extends Seeder
                 'document_id' => $docId
             ])->pluck('id');
             $plotId = $plots->random();
-            $plot = Plot::with('document')->find($plotId);
             BoughtLand::factory(1)->create([
                 'document_id' => $docId
             ]);
             SoldLand::factory(1)->create([
                 'plot_id' => $plotId,
-                'amount' => $plot->amount,
-                'document_id' => $docId
-            ]);
+            ])->each(function () use ($plotId) {
+                $plot = Plot::find($plotId);
+                $plot->status = 'sold';
+                $plot->save();
+            });
         }
     }
 }

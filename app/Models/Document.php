@@ -18,13 +18,8 @@ class Document extends Model
         return $this->hasMany(Plot::class);
     }
 
-    public function solds()
+    public function bought()
     {
-        return $this->hasMany(SoldLand::class);
-    }
-
-    public function boughts()
-    {
-        return $this->hasMany(BoughtLand::class);
+        return $this->hasOne(BoughtLand::class);
     }
 }

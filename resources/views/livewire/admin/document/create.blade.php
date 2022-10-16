@@ -18,17 +18,32 @@
         </a>
     </div>
     <form class="flex flex-col space-y-2 md:space-y-4" enctype="multipart/form-data" wire:submit.prevent="submit">
-        <div class="form-group">
-            <label class="block text-sm" for="no">
-                <span class="text-gray-700 dark:text-gray-400">No.</span>
-            </label>
-            <input
-                id="no"
-                wire:model="no"
-                class="form-control"
-                placeholder="Enter Document Number"
-            />
-            @error('no') <span class="error">{{ $message }}</span> @enderror
+        <div class="flex space-x-2 md:space-x-4">
+            <div class="form-group">
+                <label class="block text-sm" for="doc">
+                    <span class="text-gray-700 dark:text-gray-400">Document No.</span>
+                </label>
+                <input
+                    id="no"
+                    wire:model="doc"
+                    class="form-control"
+                    placeholder="Enter Document Number"
+                />
+                @error('doc') <span class="error">{{ $message }}</span> @enderror
+            </div>
+            <div class="form-group">
+                <label class="block text-sm" for="no">
+                    <span class="text-gray-700 dark:text-gray-400">Mutation No / Khatian No.</span>
+                </label>
+                <input
+                    id="mutation"
+                    wire:model="mutation"
+                    class="form-control"
+                    placeholder="Enter Khatian/Mutation Number"
+                />
+                @error('mutation') <span class="error">{{ $message }}</span> @enderror
+                @error('no') <span class="error">{{ $message }}</span> @enderror
+            </div>
         </div>
         <div class="form-group">
             <label class="block text-sm" for="amount">

@@ -53,12 +53,15 @@
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                 >
-                    <th class="px-4 py-3">Number</th>
+                    <th class="px-4 py-3">S.I</th>
+                    <th class="px-4 py-3">Document</th>
+                    <th class="px-4 py-3">Mutation</th>
                     <th class="px-4 py-3">Owner</th>
                     <th class="px-4 py-3">Amount</th>
-                    <th class="px-4 py-3">Status</th>
+                    <th class="px-4 py-3">Remaining</th>
+                    <th class="px-4 py-3 print:hidden">Status</th>
                     <th class="px-4 py-3">Additional</th>
-                    <th class="px-4 py-3">Files</th>
+                    <th class="px-4 py-3 print:hidden">Files</th>
                     <th class="px-4 py-3 print:hidden">Actions</th>
                 </tr>
                 </thead>
@@ -67,16 +70,25 @@
                 >
                 @forelse($documents as $document)
                     <tr class="text-gray-700 dark:text-gray-400">
-                        <td class="px-4 py-3">
-                            {{$document->no}}
+                        <td class="px-4 py-3 print:border">
+                            {{$documents->firstItem()+$loop->index}}
                         </td>
-                        <td class="px-4 py-3 text-sm">
+                        <td class="px-4 py-3 print:border">
+                            {{str($document->no)->before('_')}}
+                        </td>
+                        <td class="px-4 py-3 print:border">
+                            {{str($document->no)->after('_')}}
+                        </td>
+                        <td class="px-4 py-3 text-sm print:border">
                             {{$document->owner}}
                         </td>
-                        <td class="px-4 py-3 text-xs">
+                        <td class="px-4 py-3 text-xs print:border">
                             {{$document->amount}}
                         </td>
-                        <td class="px-4 py-3 text-xs">
+                        <td class="px-4 py-3 text-xs print:border">
+                            {{$this->remaining($document->id)}}
+                        </td>
+                        <td class="px-4 py-3 text-xs print:hidden">
                             @if($document->active == 1)
                                 <span
                                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
@@ -91,10 +103,10 @@
                         </span>
                             @endif
                         </td>
-                        <td class="px-4 py-3 text-sm">
+                        <td class="px-4 py-3 text-sm print:border">
                             {{$document->additional}}
                         </td>
-                        <td class="px-4 py-3 text-sm">
+                        <td class="px-4 py-3 text-sm print:hidden">
                             <ul class="flex flex-col space-y-2">
                                 @forelse(json_decode($document->files) as $file)
                                     <li>

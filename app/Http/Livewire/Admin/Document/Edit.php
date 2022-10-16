@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Document;
 
 use App\Models\Document;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -12,6 +13,8 @@ class Edit extends Component
     use WithFileUploads;
 
     public $no;
+    public $doc;
+    public $mutation;
     public $amount;
     public $owner;
     public $active;
@@ -23,6 +26,8 @@ class Edit extends Component
     public function mount()
     {
         $this->no = $this->document->no;
+        $this->doc = Str::before($this->no, '_');
+        $this->mutation = Str::after($this->no, '_');
         $this->amount = $this->document->amount;
         $this->owner = $this->document->owner;
         $this->active = $this->document->active;
@@ -35,6 +40,8 @@ class Edit extends Component
         $this->validate([
             'files.*' => ['nullable', 'file', 'max:2048'],
             'no' => ['required', 'string', 'max:255', 'unique:documents,no,' . $this->document->id],
+            'doc' => ['required', 'max:155', 'string'],
+            'mutation' => ['required', 'max:100', 'string'],
             'amount' => ['required', 'numeric', 'min:1'],
             'owner' => ['required', 'string', 'max:255']
         ]);
@@ -68,6 +75,24 @@ class Edit extends Component
         session()->flash('message', 'Document updated Successfully!');
 
         $this->redirect(route('documents.index'));
+    }
+
+    public function updatedDoc()
+    {
+        if (isset($this->mutation)) {
+            $this->no = $this->doc . '_' . $this->mutation;
+        } else {
+            $this->no = $this->doc;
+        }
+    }
+
+    public function updatedMutation()
+    {
+        if (isset($this->doc)) {
+            $this->no = $this->doc . '_' . $this->mutation;
+        } else {
+            $this->no = $this->mutation;
+        }
     }
 
     public function render()

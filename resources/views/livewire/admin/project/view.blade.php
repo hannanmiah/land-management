@@ -47,23 +47,24 @@
                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                 >
                 <tr class="text-gray-700 dark:text-gray-400">
-                    <td class="px-4 py-3">
+                    <td class="px-4 py-3 print:border">
                         {{$project->name}}
                     </td>
-                    <td class="px-4 py-3 text-sm">
+                    <td class="px-4 py-3 text-sm print:border">
                         <ul class="inline-flex flex-col space-y-2">
                             @forelse($project->plots as $plot)
-                                <li><a class="text-blue-500 hover:text-blue-600"
-                                       href="{{route('plots.show',['plot' => $plot->id])}}">{{$plot->name}}</a></li>
+                                <li class=""><a class="text-blue-500 hover:text-blue-600"
+                                                              href="{{route('plots.show',['plot' => $plot->id])}}">{{$plot->name}}
+                                        ({{$plot->amount}})</a></li>
                             @empty
                                 <li>No plots</li>
                             @endforelse
                         </ul>
                     </td>
-                    <td class="px-4 py-3 text-xs">
+                    <td class="px-4 py-3 text-xs print:border">
                         {{$project->plots->pluck('amount')->reduce(fn($c,$i) => $c+$i,0)}}
                     </td>
-                    <td class="px-4 py-3 text-sm">
+                    <td class="px-4 py-3 text-sm print:border">
                         {{$project->location}}
                     </td>
                 </tr>

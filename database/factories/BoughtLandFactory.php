@@ -18,7 +18,6 @@ class BoughtLandFactory extends Factory
     {
         return [
             'document_id' => $this->faker->uuid,
-            'amount' => $this->faker->randomDigit(),
             'issued_at' => $this->faker->date
         ];
     }

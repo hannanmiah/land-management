@@ -10,8 +10,6 @@ use Livewire\Component;
 class Edit extends Component
 {
     public SoldLand $sold;
-    public $amount;
-    public $document;
     public $plot;
     public $issued_date;
     public $statement_no;
@@ -23,9 +21,7 @@ class Edit extends Component
 
     public function mount()
     {
-        $this->amount = $this->sold->amount;
         $this->plot = $this->sold->plot->id;
-        $this->document = $this->sold->document->id;
         $this->statement_no = $this->sold->statement_no;
         $this->issued_date = $this->sold->issued_at;
     }

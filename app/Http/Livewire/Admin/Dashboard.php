@@ -12,11 +12,12 @@ class Dashboard extends Component
     {
         $totalPlot = Plot::all()->count();
         $remainingPlot = Plot::with('document')->where('status', '!=', 'sold')->get()->count();
-        $buysArray = BoughtLand::all()->pluck('amount');
+        $buysArray = BoughtLand::with(['document'])->get()->pluck('document.amount');
         $totalBuy = $buysArray->reduce(fn($c, $i) => $c + $i, 0);
         $soldArray = Plot::with('document')->where('status', 'sold')->get()->pluck('amount');
         $totalSold = $soldArray->reduce(fn($c, $i) => $c + $i, 0);
+        $remainingAmount = $totalBuy - $totalSold;
 
-        return view('livewire.admin.dashboard', ['total_plot' => $totalPlot, 'remaining_plot' => $remainingPlot, 'total_buy' => $totalBuy, 'total_sell' => $totalSold]);
+        return view('livewire.admin.dashboard', ['total_plot' => $totalPlot, 'remaining_plot' => $remainingPlot, 'total_buy' => $totalBuy, 'total_sell' => $totalSold, 'remaining_amount' => $remainingAmount]);
     }
 }

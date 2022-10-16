@@ -22,4 +22,9 @@ class Plot extends Model
     {
         return $this->belongsTo(Document::class);
     }
+
+    public function sold()
+    {
+        return $this->hasOne(SoldLand::class);
+    }
 }

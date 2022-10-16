@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('bought_lands', function (Blueprint $table) {
             $table->string('id')->primary()->unique();
             $table->string('document_id');
-            $table->double('amount');
             $table->timestamp('issued_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -19,18 +19,6 @@
     </div>
     <form class="flex flex-col space-y-2 md:space-y-4" wire:submit.prevent="submit">
         <div class="form-group">
-            <label class="block text-sm" for="amount">
-                <span class="text-gray-700 dark:text-gray-400">Amount</span>
-            </label>
-            <input
-                id="amount"
-                wire:model="amount"
-                class="form-control"
-                placeholder="Enter land amount"
-            />
-            @error('amount') <span class="error">{{ $message }}</span> @enderror
-        </div>
-        <div class="form-group">
             <label class="block text-sm" for="document">
                 <span class="text-gray-700 dark:text-gray-400">Document</span>
             </label>

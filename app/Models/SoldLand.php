@@ -13,11 +13,6 @@ class SoldLand extends Model
 
     protected $guarded = [];
 
-    public function document()
-    {
-        return $this->belongsTo(Document::class);
-    }
-
     public function plot()
     {
         return $this->belongsTo(Plot::class);

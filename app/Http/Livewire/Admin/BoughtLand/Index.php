@@ -22,14 +22,13 @@ class Index extends Component
     public function destroy($id)
     {
         $bought = BoughtLand::with('document')->findOrFail($id);
-        $bought->document()->delete();
         $bought->delete();
     }
 
 
     public function remainingAmount($docId)
     {
-        $selectedBoughtArr = BoughtLand::with('document')->where('document_id', $docId)->get()->pluck('amount');
+        $selectedBoughtArr = BoughtLand::with('document')->where('document_id', $docId)->get()->pluck('document.amount');
         $totalBought = $selectedBoughtArr->reduce(fn($c, $i) => $c + $i, 0);
         $totalSellsArr = Plot::with('document')->where('document_id', $docId)->where('status', 'sold')->get()->pluck('amount');
         $totalSells = $totalSellsArr->reduce(fn($c, $i) => $c + $i, 0);

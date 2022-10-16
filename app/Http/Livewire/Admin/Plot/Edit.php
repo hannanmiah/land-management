@@ -63,7 +63,7 @@ class Edit extends Component
         if (isset($this->document)) {
             $boughtsArrayAmount = BoughtLand::with('document')->where('document_id', $this->document)->get()->pluck('amount');
             $totalBoughts = $boughtsArrayAmount->reduce(fn($c, $i) => $c + $i, 0);
-            $soldsArrayAmount = Plot::with('document')->where('document_id', $this->document)->get()->pluck('amount');
+            $soldsArrayAmount = Plot::with('document')->whereNot('id', $this->plot->id)->where('document_id', $this->document)->get()->pluck('amount');
             $totalSolds = $soldsArrayAmount->reduce(fn($c, $i) => $c + $i, 0);
 
             return $totalBoughts - $totalSolds;

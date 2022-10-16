@@ -18,8 +18,6 @@ class SoldLandFactory extends Factory
     {
         return [
             'plot_id' => $this->faker->uuid,
-            'document_id' => $this->faker->uuid,
-            'amount' => $this->faker->randomNumber(),
             'statement_no' => $this->faker->randomNumber(),
             'issued_at' => $this->faker->date
         ];

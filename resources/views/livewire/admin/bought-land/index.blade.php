@@ -52,6 +52,7 @@
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                 >
+                    <th class="px-4 py-3">S.I</th>
                     <th class="px-4 py-3">Document</th>
                     <th class="px-4 py-3">Amount</th>
                     <th class="px-4 py-3">Remaining Amount</th>
@@ -65,12 +66,15 @@
                 @forelse($boughts as $bought)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3">
+                            {{$boughts->firstItem()+$loop->index}}
+                        </td>
+                        <td class="px-4 py-3">
                             @if($bought->document)
                                 {{$bought->document->no}} ({{$bought->document->owner}})
                             @endif
                         </td>
                         <td class="px-4 py-3 text-sm">
-                            {{$bought->amount}}
+                            {{$bought->document->amount}}
                         </td>
                         <td class="px-4 py-3 text-sm">
                             {{$this->remainingAmount($bought->document->id)}}

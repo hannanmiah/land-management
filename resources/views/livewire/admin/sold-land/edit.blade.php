@@ -19,39 +19,6 @@
     </div>
     <form class="flex flex-col space-y-2 md:space-y-4" wire:submit.prevent="submit">
         <div class="form-group">
-            <label class="block text-sm" for="amount">
-                <span class="text-gray-700 dark:text-gray-400">Amount</span>
-            </label>
-            <input
-                disabled
-                id="amount"
-                wire:model="amount"
-                class="form-control disabled:opacity-25"
-                placeholder="Enter land amount"
-            />
-            @error('amount') <span class="error">{{ $message }}</span> @enderror
-        </div>
-        <div class="form-group">
-            <label class="block text-sm" for="document">
-                <span class="text-gray-700 dark:text-gray-400">Document</span>
-            </label>
-            <select
-                disabled
-                id="document"
-                wire:model="document"
-                class="disabled:opacity-25
-                focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-            >
-                <option value="">Select document</option>
-                @forelse($documents as $document)
-                    <option value="{{$document->id}}">{{$document->no}} : {{$document->owner}}</option>
-                @empty
-                    <option value="">No document!</option>
-                @endforelse
-            </select>
-            @error('document') <span class="error">{{ $message }}</span> @enderror
-        </div>
-        <div class="form-group">
             <label class="block text-sm" for="plot">
                 <span class="text-gray-700 dark:text-gray-400">Plot</span>
             </label>

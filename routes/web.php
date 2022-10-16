@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\StatController;
 use App\Http\Livewire\Admin\Dashboard;
 use App\Http\Livewire\Admin\Project\Create;
 use App\Http\Livewire\Admin\Project\View;
+use App\Http\Livewire\Admin\Setting\Password;
+use App\Http\Livewire\Admin\Setting\Photo;
 use App\Http\Livewire\Admin\SoldLand\Delete;
 use App\Http\Livewire\Admin\SoldLand\Edit;
 use App\Http\Livewire\Admin\SoldLand\Index;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +26,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $allUsers = User::with(['role' => fn($q) => $q->where('slug', 'admin')])->get();
+    return view('welcome', ['users' => $allUsers]);
 });
 
 Route::get('/dashboard', function () {
@@ -66,9 +72,20 @@ Route::middleware(['auth', 'can:viewAny,App\Models\Document'])->prefix('admin')-
         Route::get('/{sold}/delete', Delete::class)->name('soldlands.delete');
     });
 
-    Route::prefix('invoices')->controller(\App\Http\Controllers\InvoiceController::class)->group(function () {
+    Route::prefix('settings')->group(function () {
+        Route::get('', \App\Http\Livewire\Admin\Setting\Index::class)->name('settings.index');
+        Route::get('password', Password::class)->name('settings.password');
+        Route::get('photo', Photo::class)->name('settings.photo');
+    });
+
+    Route::prefix('invoices')->controller(InvoiceController::class)->group(function () {
         Route::get('bought', 'bought')->name('invoices.bought');
     });
+});
+
+Route::middleware('guest')->prefix('admin')->group(function () {
+    Route::get('create_once', [AdminController::class, 'once'])->name('admin.once');
+    Route::post('create_once', [AdminController::class, 'create_once']);
 });
 
 Route::prefix('stats')->controller(StatController::class)->group(function () {

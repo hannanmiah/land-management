@@ -20,14 +20,11 @@ class Index extends Component
     public function destroy($id)
     {
         $sold = SoldLand::with('document', 'plot')->findOrFail($id);
-
-        $sold->document()->delete();
-        $sold->plot()->delete();
         $sold->delete();
     }
 
     public function render()
     {
-        return view('livewire.admin.sold-land.index', ['solds' => SoldLand::with(['document', 'plot'])->latest()->paginate(10)]);
+        return view('livewire.admin.sold-land.index', ['solds' => SoldLand::with(['plot'])->latest()->paginate(10)]);
     }
 }

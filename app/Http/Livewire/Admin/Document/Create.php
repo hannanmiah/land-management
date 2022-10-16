@@ -11,6 +11,8 @@ class Create extends Component
     use WithFileUploads;
 
     public $no;
+    public $doc;
+    public $mutation;
     public $amount;
     public $owner;
     public $active;
@@ -19,6 +21,8 @@ class Create extends Component
 
     protected $rules = [
         'files.*' => ['nullable', 'file', 'max:2048'],
+        'doc' => ['required', 'max:155', 'string'],
+        'mutation' => ['required', 'max:100', 'string'],
         'no' => ['required', 'string', 'max:255', 'unique:documents'],
         'amount' => ['required', 'numeric', 'min:1'],
         'owner' => ['required', 'string', 'max:255']
@@ -50,6 +54,24 @@ class Create extends Component
         session()->flash('message', 'Document created Successfully!');
 
         $this->redirect(route('documents.index'));
+    }
+
+    public function updatedDoc()
+    {
+        if (isset($this->mutation)) {
+            $this->no = $this->doc . '_' . $this->mutation;
+        } else {
+            $this->no = $this->doc;
+        }
+    }
+
+    public function updatedMutation()
+    {
+        if (isset($this->doc)) {
+            $this->no = $this->doc . '_' . $this->mutation;
+        } else {
+            $this->no = $this->mutation;
+        }
     }
 
     public function render()

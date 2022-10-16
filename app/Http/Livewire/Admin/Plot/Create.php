@@ -6,7 +6,6 @@ use App\Models\BoughtLand;
 use App\Models\Document;
 use App\Models\Plot;
 use App\Models\Project;
-use App\Models\SoldLand;
 use Livewire\Component;
 
 class Create extends Component
@@ -16,7 +15,6 @@ class Create extends Component
     public $no;
     public $name;
     public $amount;
-
 
     public function submit()
     {
@@ -55,9 +53,9 @@ class Create extends Component
     public function remainingAmount()
     {
         if (isset($this->document)) {
-            $boughtsArrayAmount = BoughtLand::with('document')->where('document_id', $this->document)->get()->pluck('amount');
+            $boughtsArrayAmount = BoughtLand::with('document')->where('document_id', $this->document)->get()->pluck('document.amount');
             $totalBoughts = $boughtsArrayAmount->reduce(fn($c, $i) => $c + $i, 0);
-            $soldsArrayAmount = SoldLand::with('document')->where('document_id', $this->document)->get()->pluck('amount');
+            $soldsArrayAmount = Plot::with(['document'])->where('status', 'sold')->orWhere('status', 'created')->where('document_id', $this->document)->pluck('amount');
             $totalSolds = $soldsArrayAmount->reduce(fn($c, $i) => $c + $i, 0);
 
             return (double)$totalBoughts - $totalSolds;
@@ -80,6 +78,6 @@ class Create extends Component
         $docIds = BoughtLand::with(['document' => function ($query) {
             $query->where('active', 1);
         }])->get()->pluck('document_id')->toArray();
-        return view('livewire.admin.plot.create', ['projects' => Project::all(), 'documents' => Document::with(['plots', 'boughts'])->whereIn('id', $docIds)->where('active', 1)->get()]);
+        return view('livewire.admin.plot.create', ['projects' => Project::all(), 'documents' => Document::with(['plots', 'bought'])->whereIn('id', $docIds)->where('active', 1)->get()]);
     }
 }
