@@ -19,7 +19,7 @@ class Index extends Component
 
     public function destroy($id)
     {
-        $plot = Plot::with('document', 'project')->findOrFail($id);
+        $plot = Plot::with('document', 'project','sold')->findOrFail($id);
         $plot->delete();
     }
 

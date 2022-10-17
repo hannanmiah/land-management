@@ -26,7 +26,7 @@ class Index extends Component
 
     public function destroy($id)
     {
-        $doc = Document::with('plots', 'boughts', 'solds')->find($id);
+        $doc = Document::with('plots', 'bought')->find($id);
         $doc->delete();
     }
 

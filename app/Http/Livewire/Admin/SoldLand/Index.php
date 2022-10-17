@@ -19,7 +19,7 @@ class Index extends Component
 
     public function destroy($id)
     {
-        $sold = SoldLand::with('document', 'plot')->findOrFail($id);
+        $sold = SoldLand::with(['plot'])->findOrFail($id);
         $sold->delete();
     }
 
