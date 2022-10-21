@@ -6,16 +6,18 @@
                 <th>SI</th>
                 <th>Document</th>
                 <th>Amount</th>
-                <th>Remaining Amount</th>
+                <th>Plot</th>
+                <th>Statement No.</th>
                 <th>Issue Date</th>
             </tr>
-            @forelse($boughts as $bought)
+            @forelse($solds as $sold)
                 <tr>
-                    <td>{{$boughts->firstItem()+$loop->index}}</td>
-                    <td>{{$bought->document->owner}}</td>
-                    <td>{{$bought->amount}}</td>
-                    <td>{{$bought->remaining}}</td>
-                    <td>{{$bought->issued_at}}</td>
+                    <td>{{$solds->firstItem()+$loop->index}}</td>
+                    <td>{{$sold->plot->document->no}} - {{$sold->plot->document->owner}}</td>
+                    <td>{{$sold->amount}}</td>
+                    <td>{{$sold->plot->name}}</td>
+                    <td>{{$sold->statement_no}}</td>
+                    <td>{{$sold->issued_at}}</td>
                 </tr>
             @empty
                 <tr>

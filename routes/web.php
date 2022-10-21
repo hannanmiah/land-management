@@ -80,6 +80,10 @@ Route::middleware(['auth', 'can:viewAny,App\Models\Document'])->prefix('admin')-
 
     Route::prefix('invoices')->controller(InvoiceController::class)->group(function () {
         Route::get('bought', 'bought')->name('invoices.bought');
+        Route::get('sold', 'sold')->name('invoices.sold');
+        Route::get('document', 'document')->name('invoices.document');
+        Route::get('plot', 'plot')->name('invoices.plot');
+        Route::get('project', 'project')->name('invoices.project');
     });
 });
 

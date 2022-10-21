@@ -17,4 +17,9 @@ class SoldLand extends Model
     {
         return $this->belongsTo(Plot::class);
     }
+
+    public function getAmountAttribute()
+    {
+        return $this->plot->amount;
+    }
 }

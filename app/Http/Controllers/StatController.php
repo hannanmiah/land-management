@@ -28,6 +28,7 @@ class StatController extends Controller
         foreach ($soldDocuments as $document) {
             $soldLandAmount = SoldLand::with(['plot' => function ($query) use ($document) {
                 $query->where('document_id', $document->id);
+                $query->where('status', 'sold');
             }])->get()->pluck('plot.amount');
             $amount = $this->addAmount($soldLandAmount);
             $soldAmountArr[] = [$document->no => $amount];

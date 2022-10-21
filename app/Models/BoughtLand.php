@@ -9,12 +9,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BoughtLand extends Model
 {
-    use HasFactory, HasUlids,SoftDeletes;
+    use HasFactory, HasUlids, SoftDeletes;
 
     protected $guarded = [];
 
     public function document()
     {
         return $this->belongsTo(Document::class);
+    }
+
+    public function getAmountAttribute()
+    {
+        return $this->document->amount;
+    }
+
+    public function getRemainingAttribute()
+    {
+        return $this->document->remaining;
     }
 }

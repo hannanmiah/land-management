@@ -22,4 +22,9 @@ class Document extends Model
     {
         return $this->hasOne(BoughtLand::class);
     }
+
+    public function getRemainingAttribute()
+    {
+        return (double)$this->amount - $this->plots->where('status', 'sold')->sum('amount');
+    }
 }
