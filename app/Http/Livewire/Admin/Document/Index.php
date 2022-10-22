@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Document;
 
+use App\Models\BoughtLand;
 use App\Models\Document;
 use App\Models\Plot;
 use Illuminate\Support\Facades\Storage;

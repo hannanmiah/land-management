@@ -8,6 +8,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>NICL Invoice</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100&display=swap');
+
         * {
             box-sizing: border-box;
         }
@@ -21,7 +23,7 @@
 
         body {
             margin: 0;
-            font-family: sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: #333;
         }
 
@@ -93,12 +95,28 @@
             box-shadow: 0 -2.7em 0 -6px var(--color-main),
             -6px -2.7em 0 -6px var(--color-main);
         }
+
+        header {
+            border-bottom: 2px solid #ddd;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            column-gap: 2rem;
+        }
+
+        main h2 {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<div>
+<header>
     <h1>NICL Properties and Developers Ltd.</h1>
-</div>
-@yield('content')
+</header>
+<main>
+    @yield('content')
+</main>
 </body>
 </html>

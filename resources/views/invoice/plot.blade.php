@@ -1,5 +1,6 @@
 @extends('layouts.invoice')
 @section('content')
+    <h2>Plots</h2>
     <div class="table-container">
         <table class="table-rwd">
             <tr>

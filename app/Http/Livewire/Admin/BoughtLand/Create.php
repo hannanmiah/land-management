@@ -32,6 +32,7 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.admin.bought-land.create', ['documents' => Document::with('plots')->where('active', 1)->get()]);
+        $boughtDocs = BoughtLand::with(['document'])->get()->pluck('document_id')->toArray();
+        return view('livewire.admin.bought-land.create', ['documents' => Document::with('plots')->whereNotIn('id', $boughtDocs)->where('active', 1)->get()]);
     }
 }

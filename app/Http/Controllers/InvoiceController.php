@@ -15,36 +15,39 @@ class InvoiceController extends Controller
     {
         $documents = Document::with(['plots', 'bought'])->latest()->paginate(10);
         $pdf = Pdf::loadView('invoice.document', ['documents' => $documents]);
-        return $pdf->download('invoice-document.pdf');
+        $fileName = 'invoice-document-' . now()->format('m-d-Y H:i') . '.pdf';
+        return $pdf->download($fileName);
     }
 
     public function bought()
     {
         $boughts = BoughtLand::with('document')->latest()->paginate(10);
         $pdf = Pdf::loadView('invoice.bought', ['boughts' => $boughts]);
-        return $pdf->download('invoice-bought.pdf');
+        $fileName = 'invoice-bought-' . now()->format('m-d-Y H:i') . '.pdf';
+        return $pdf->download($fileName);
     }
 
     public function sold()
     {
         $solds = SoldLand::with('plot')->latest()->paginate(10);
         $pdf = Pdf::loadView('invoice.sold', ['solds' => $solds]);
-        return $pdf->download('invoice-sold.pdf');
+        $fileName = 'invoice-sold-' . now()->format('m-d-Y H:i') . '.pdf';
+        return $pdf->download($fileName);
     }
 
     public function plot()
     {
         $plots = Plot::with(['document', 'sold', 'project'])->latest()->paginate(10);
         $pdf = Pdf::loadView('invoice.plot', ['plots' => $plots]);
-
-        return $pdf->download('invoice-plot.pdf');
+        $fileName = 'invoice-plot-' . now()->format('m-d-Y H:i') . '.pdf';
+        return $pdf->download($fileName);
     }
 
     public function project()
     {
         $projects = Project::with(['plots'])->latest()->paginate(10);
         $pdf = Pdf::loadView('invoice.project', ['projects' => $projects]);
-
-        return $pdf->download('invoice-project.pdf');
+        $fileName = 'invoice-project-' . now()->format('m-d-Y H:i') . '.pdf';
+        return $pdf->download($fileName);
     }
 }

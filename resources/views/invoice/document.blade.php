@@ -1,5 +1,6 @@
 @extends('layouts.invoice')
 @section('content')
+    <h2>Documents</h2>
     <div class="table-container">
         <table class="table-rwd">
             <tr>
@@ -9,6 +10,7 @@
                 <th>Owner</th>
                 <th>Amount</th>
                 <th>Remaining</th>
+                <th>Additional</th>
             </tr>
             @forelse($documents as $document)
                 <tr>
@@ -18,6 +20,7 @@
                     <td>{{$document->owner}}</td>
                     <td>{{$document->amount}}</td>
                     <td>{{$document->remaining}}</td>
+                    <td>{{$document->additional}}</td>
                 </tr>
             @empty
                 <tr>
