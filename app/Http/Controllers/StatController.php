@@ -22,7 +22,9 @@ class StatController extends Controller
         $boughtDocArray = BoughtLand::with(['document' => fn($query) => $query->where('active', 1)])->get()->pluck('document_id')->toArray();
         $documents = Document::with(['plots', 'bought'])->whereIn('id', $boughtDocArray)->where('active', 1)->get();
         $soldDocArray = Plot::with(['document'])->where('status', 'sold')->get()->pluck('document_id')->toArray();
-        $soldDocuments = Document::with(['plots'])->whereIn('id', $soldDocArray)->where('active', 1)->get();
+        $soldDocuments = Document::with(['plots' => function ($query) {
+            $query->where('status', 'sold');
+        }])->whereIn('id', $soldDocArray)->get();
         foreach ($documents as $document) {
             $totalAmountArr[] = [$document->no => $document->amount];
         }
