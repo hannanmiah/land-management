@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BoughtLand;
 use App\Models\Document;
+use App\Models\Plot;
 use App\Models\SoldLand;
 use Illuminate\Support\Collection;
 
@@ -20,7 +21,7 @@ class StatController extends Controller
         $soldAmountArr = [];
         $boughtDocArray = BoughtLand::with(['document' => fn($query) => $query->where('active', 1)])->get()->pluck('document_id')->toArray();
         $documents = Document::with(['plots', 'bought'])->whereIn('id', $boughtDocArray)->where('active', 1)->get();
-        $soldDocArray = SoldLand::with(['plot' => fn($query) => $query->where('status', 'sold')])->get()->pluck('plot.document_id')->toArray();
+        $soldDocArray = Plot::with(['document'])->where('status', 'sold')->get()->pluck('document_id')->toArray();
         $soldDocuments = Document::with(['plots'])->whereIn('id', $soldDocArray)->where('active', 1)->get();
         foreach ($documents as $document) {
             $totalAmountArr[] = [$document->no => $document->amount];
