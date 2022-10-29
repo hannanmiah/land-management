@@ -103,7 +103,7 @@
                         </span>
                             @endif
                         </td>
-                        <td class="px-4 py-3 text-sm print:border">
+                        <td class="px-4 py-3 text-sm bangla print:border">
                             {{$document->additional}}
                         </td>
                         <td class="px-4 py-3 text-sm print:hidden">

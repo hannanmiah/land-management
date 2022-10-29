@@ -96,10 +96,10 @@ return array(
             "https://" => ["rules" => []]
         ],
 
-         /**
-          * @var string
-          */
-        'log_output_file' => null,
+        /**
+         * @var string
+         */
+        'log_output_file' => storage_path('logs/dompdf.log'),
 
         /**
          * Whether to enable font subsetting or not.
@@ -171,13 +171,13 @@ return array(
          */
         "default_paper_size" => "a4",
 
-         /**
-          * The default paper orientation.
-          *
-          * The orientation of the page (portrait or landscape).
-          *
-          * @var string
-          */
+        /**
+         * The default paper orientation.
+         *
+         * The orientation of the page (portrait or landscape).
+         *
+         * @var string
+         */
         'default_paper_orientation' => "portrait",
 
         /**

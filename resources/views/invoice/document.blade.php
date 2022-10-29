@@ -20,7 +20,7 @@
                     <td>{{$document->owner}}</td>
                     <td>{{$document->amount}}</td>
                     <td>{{$document->remaining}}</td>
-                    <td>{{$document->additional}}</td>
+                    <td class="bangla">{{$document->additional}}</td>
                 </tr>
             @empty
                 <tr>

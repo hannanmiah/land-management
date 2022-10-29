@@ -8,7 +8,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>NICL Invoice</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100&display=swap');
+        @font-face {
+            font-family: 'kalpurush';
+            src: url({{storage_path('fonts/kalpurush.ttf')}}) format("truetype");
+            font-style: normal;
+        }
+
+        .bangla {
+            font-family: 'kalpurush', serif;
+        }
 
         * {
             box-sizing: border-box;
@@ -23,9 +31,10 @@
 
         body {
             margin: 0;
-            font-family: 'Roboto', sans-serif;
+            font-family: sans-serif;
             color: #333;
         }
+
 
         h1 {
             text-align: center;
