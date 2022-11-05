@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Project;
 use Illuminate\View\Component;
 
 class MobileSideBar extends Component
@@ -23,6 +24,7 @@ class MobileSideBar extends Component
      */
     public function render()
     {
-        return view('components.mobile-side-bar');
+        $proejcts = Project::with(['plots'])->latest()->limit(4)->get();
+        return view('components.mobile-side-bar', ['projects' => $proejcts]);
     }
 }

@@ -72,6 +72,12 @@
                 toggleNotificationsMenu: () => {
                     this.isNotificationsMenuOpen = !this.isNotificationsMenuOpen
                 },
+                toggleSideMenu() {
+                    this.isSideMenuOpen = !this.isSideMenuOpen
+                },
+                closeSideMenu(){
+                    this.isSideMenuOpen = false
+                },
                 togglePagesMenu() {
                     this.isPagesMenuOpen = !this.isPagesMenuOpen
                 },
